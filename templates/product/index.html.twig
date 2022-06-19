@@ -32,6 +32,7 @@
                <th>Action</th>
             </tr>
              </thead>
+            </tbody>
              {% for product in products %}
                <tr> 
                   <td>{{loop.index}}</td>
@@ -45,15 +46,28 @@
                        width="50" height="50"
                        alt="{{product.name}}"
                        class="fluid my-2 rounded">
-                    {% endif %}
+                    {% else %}
+                        <image src="{{absolute_url('uploads/flowers.png')}}"
+                        width="50" height="50"
+                        alt="{{product.name}}"
+                        class="fluid my-2 rounded">
+                   {% endif %}
                     
                   </td>
+                   <td class="d-flex justify-content-around align-items-center">
+                    <a href="{{ path('product_show',{id:product.id}) }}" class="btn btn-ms btn-dark">show</a>
+                    <a href="{{ path('product_edit',{id:product.id}) }}" class="btn btn-ms btn-warning">edit</a>
+                     <form href="{{'product.id'}}" action="{{ path('product_delete',{id:product.id}) }}"
+                    method="POST"></form>
+                  <button onclick="deleteItem('{{product.id}}')" class="btn btn-ms btn-danger">delete</button>
+                   </td>
                  
               </tr>
              {% endfor %}
+            </tbody>
             </table>
         </div>
       </div>
     </div>
-</div>
+  </div>
 {% endblock %}
